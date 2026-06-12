@@ -5,116 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>વઘાર બોક્સ - Vaghar Box</title>
     <style>
+        :root {
+            --primary: #fc8019; /* Swiggy Orange */
+            --dark: #282c3f;
+            --light: #f4f6f8;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #fcf8f2;
-            color: #333;
+            background-color: var(--light);
+            color: var(--dark);
         }
         header {
-            background-color: #8B4513;
-            color: white;
-            text-align: center;
-            padding: 30px 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: white;
+            box-shadow: 0 15px 40px -20px rgba(40,44,63,.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        header h1 {
+        .logo h1 {
+            color: var(--primary);
             margin: 0;
-            font-size: 2.5rem;
-            color: #f4a261;
-        }
-        header p {
-            margin: 5px 0 0 0;
-            font-style: italic;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
+            font-size: 24px;
         }
         .container {
             max-width: 800px;
             margin: 20px auto;
-            padding: 15px;
+            padding: 10px;
         }
-        .product-card {
+        .menu-item {
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            margin-bottom: 15px;
-            border: 1px solid #eaddca;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        .product-info h3 {
-            margin: 0 0 5px 0;
-            font-size: 1.3rem;
-            color: #8B4513;
+        .item-details h3 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
         }
-        .product-info p {
-            margin: 0;
-            color: #666;
-            font-weight: bold;
+        .price {
+            color: #535665;
+            font-weight: 600;
         }
-        .order-btn {
-            background-color: #e76f51;
+        .add-btn {
+            background: white;
+            border: 1px solid #e9e9eb;
+            color: #60b246;
+            font-weight: 700;
+            padding: 8px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 3px 8px -3px #cbdbc6;
+        }
+        .add-btn:hover {
+            box-shadow: 0 4px 12px -3px #a3cc96;
+        }
+        .cart-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #60b246;
             color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            display: none;
+        }
+        .checkout-btn {
+            background: white;
+            color: #60b246;
             border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 8px;
+            padding: 8px 15px;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-        .order-btn:hover {
-            background-color: #2a9d8f;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #777;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>વઘાર બોક્સ (Vaghar Box)</h1>
-        <p>The Taste of Tradition</p>
-    </header>
+<header>
+    <div class="logo">
+        <h1>વઘાર બોક્સ 📦</h1>
+    </div>
+</header>
 
-    <div class="container">
-        <div class="product-card">
-            <div class="product-info">
-                <h3>સ્પેશિયલ ગરમ મસાલો (Premium Garam Masala)</h3>
-                <p>ભાવ: ₹૧૫૦ (૨૫૦ ગ્રામ)</p>
-            </div>
-            <a href="https://wa.me/91YOURNUMBER?text=મને%20સ્પેશિયલ%20ગરમ%20મસાલો%20ઓર્ડર%20કરવો%20છે" target="_blank" class="order-btn">ઓર્ડર કરો</a>
+<div class="container">
+    <h2>અમારી સ્પેશિયલ આઈટમ્સ</h2>
+    
+    <div class="menu-item">
+        <div class="item-details">
+            <h3>સ્પેશિયલ ગરમ મસાલો (250g)</h3>
+            <div class="price">₹150</div>
         </div>
-
-        <div class="product-card">
-            <div class="product-info">
-                <h3>દેશી કાઠિયાવાડી લસણ ચટણી (Garlic Chutney)</h3>
-                <p>ભાવ: ₹૧૦步 (૨૦૦ ગ્રામ)</p>
-            </div>
-            <a href="https://wa.me/91YOURNUMBER?text=મને%20દેશી%20કાઠિયાવાડી%20લસણ%20ચટણી%20ઓર્ડર%20કરવો%20છે" target="_blank" class="order-btn">ઓર્ડર કરો</a>
-        </div>
-
-        <div class="product-card">
-            <div class="product-info">
-                <h3>ગુજરાતી ખાટી-મીઠી દાળ મસાલો</h3>
-                <p>ભાવ: ₹૧૨૦ (૨૫૦ ગ્રામ)</p>
-            </div>
-            <a href="https://wa.me/91YOURNUMBER?text=મને%20ગુજરાતી%20દાળ%20મસાલો%20ઓર્ડર%20કરવો%20છે" target="_blank" class="order-btn">ઓર્ડર કરો</a>
-        </div>
+        <button class="add-btn" onclick="addToCart('સ્પેશિયલ ગરમ મસાલો', 150)">ADD</button>
     </div>
 
-    <footer>
-        <p>© 2026 વઘાર બોક્સ. All Rights Reserved.</p>
-    </footer>
+    <div class="menu-item">
+        <div class="item-details">
+            <h3>દેશી કાઠિયાવાડી લસણ ચટણી (200g)</h3>
+            <div class="price">₹100</div>
+        </div>
+        <button class="add-btn" onclick="addToCart('લસણ ચટણી', 100)">ADD</button>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-details">
+            <h3>ગુજરાતી ખાટી-મીઠી દાળ મસાલો (250g)</h3>
+            <div class="price">₹120</div>
+        </div>
+        <button class="add-btn" onclick="addToCart('દાળ મસાલો', 120)">ADD</button>
+    </div>
+</div>
+
+<div class="cart-bar" id="cartBar">
+    <span id="cartTotal">૧ આઈટમ | ₹૦</span>
+    <button class="checkout-btn" onclick="sendOrder()">ઓર્ડર કન્ફર્મ કરો ➔</button>
+</div>
+
+<script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(name, price) {
+        cart.push(name);
+        total += price;
+        
+        document.getElementById('cartBar').style.display = 'flex';
+        document.getElementById('cartTotal').innerText = cart.length + " આઈટમ ઉમેરાઈ | કુલ: ₹" + total;
+    }
+
+    function sendOrder() {
+        // અહીં તમારો સાચો વૉટ્સએપ નંબર લખો (દેશના કોડ 91 સાથે)
+        let phoneNumber = "919999999999"; 
+        let message = `નવો ઓર્ડર (વઘાર બોક્સ):%0A- ${cart.join('%0A- ')}%0A%0A*કુલ બિલ: ₹${total}*%0A%0Aકૃપા કરીને પેમેન્ટ માટે QR કોડ અથવા UPI આઈડી મોકલો.`;
+        
+        window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    }
+</script>
 
 </body>
 </html>
