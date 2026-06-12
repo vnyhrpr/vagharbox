@@ -3,24 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vaghar Box</title>
+    <title>Vaghar Box - Premium Spices</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f4; margin: 0; }
-        .header { background: white; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .hero { background: #fc8019; color: white; padding: 40px 20px; text-align: center; }
-        .container { max-width: 500px; margin: 20px auto; padding: 20px; }
-        .card { background: white; padding: 20px; margin-bottom: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .add-btn { background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #f4f6f8; margin: 0; padding-bottom: 80px; }
+        header { background: white; padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .menu-container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
+        .card { background: white; border-radius: 16px; padding: 15px; margin-bottom: 15px; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .card img { width: 100px; height: 100px; border-radius: 12px; object-fit: cover; }
+        .info { margin-left: 15px; flex-grow: 1; }
+        .info h3 { margin: 0; font-size: 16px; color: #282c3f; }
+        .info p { color: #535665; font-size: 14px; margin: 5px 0; }
+        .price { font-weight: 800; color: #000; }
+        .add-btn { background: #60b246; color: white; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; }
+        .floating-cart { position: fixed; bottom: 20px; left: 15px; right: 15px; background: #60b246; color: white; padding: 15px 20px; border-radius: 10px; display: none; justify-content: space-between; align-items: center; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="header"><h1>Vaghar Box 📦</h1></div>
-    <div class="hero"><h2>Premium Spices</h2></div>
-    <div class="container">
-        <div class="card">
-            <div><h3>Garam Masala</h3><p>₹150</p></div>
-            <button class="add-btn" onclick="alert('Added!')">ADD</button>
+
+<header><h1>Vaghar Box 📦</h1></header>
+
+<div class="menu-container">
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=200" alt="Garam Masala">
+        <div class="info">
+            <h3>Special Garam Masala</h3>
+            <p class="price">₹150</p>
+            <button class="add-btn" onclick="add('Garam Masala', 150)">ADD</button>
         </div>
     </div>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=200" alt="Chutney">
+        <div class="info">
+            <h3>Garlic Chutney</h3>
+            <p class="price">₹100</p>
+            <button class="add-btn" onclick="add('Garlic Chutney', 100)">ADD</button>
+        </div>
+    </div>
+</div>
+
+<div id="cart" class="floating-cart">
+    <span id="cart-text">0 items</span>
+    <button style="background:white; color:#60b246; border:none; padding:8px 15px; border-radius:5px; font-weight:bold; cursor:pointer;" onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+    let cart = []; let total = 0;
+    function add(name, price) {
+        cart.push(name); total += price;
+        document.getElementById('cart').style.display = 'flex';
+        document.getElementById('cart-text').innerText = cart.length + " Items | ₹" + total;
+    }
+    function checkout() {
+        let msg = "Order details: " + cart.join(", ") + ". Total: ₹" + total;
+        window.open("https://wa.me/919999999999?text=" + encodeURIComponent(msg));
+    }
+</script>
 </body>
 </html>
