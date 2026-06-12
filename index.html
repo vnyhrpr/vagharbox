@@ -24,7 +24,46 @@
 
 <header><h1>Vaghar Box 📦</h1></header>
 
-<div class="menu-container">
+<div class="menu-container"><div style="text-align: center; margin: 20px 0;">
+    <button onclick="filterMenu('all')" style="padding: 8px 16px; border-radius: 20px; border: 1px solid #fc8019; background: white;">All</button>
+    <button onclick="filterMenu('kathiyawadi')" style="padding: 8px 16px; border-radius: 20px; border: 1px solid #fc8019; background: white;">Kathiyawadi</button>
+    <button onclick="filterMenu('punjabi')" style="padding: 8px 16px; border-radius: 20px; border: 1px solid #fc8019; background: white;">Punjabi</button>
+</div>
+
+<div class="menu-container" id="menu">
+    <div class="card" data-category="kathiyawadi">
+        <img src="https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=200" alt="Chutney">
+        <div class="info">
+            <h3>Garlic Chutney</h3>
+            <p>Kathiyawadi Special</p>
+            <p class="price">₹100</p>
+            <button class="add-btn" onclick="add('Garlic Chutney', 100)">ADD</button>
+        </div>
+    </div>
+    
+    <div class="card" data-category="punjabi">
+        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200" alt="Paneer">
+        <div class="info">
+            <h3>Paneer Butter Masala</h3>
+            <p>Punjabi Special</p>
+            <p class="price">₹250</p>
+            <button class="add-btn" onclick="add('Paneer Butter Masala', 250)">ADD</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function filterMenu(category) {
+        let cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
     <div class="card">
         <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=200" alt="Garam Masala">
         <div class="info">
