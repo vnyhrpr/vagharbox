@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vaghar Box - Premium Spices</title>
+    <title>Vaghar Box - Premium Authentic Spices</title>
     <style>
         :root {
             --primary: #fc8019; /* Swiggy Orange */
             --dark: #282c3f;
             --light: #f4f6f8;
             --gray: #686b78;
+            --green: #60b246;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--light);
+            background-color: #fff;
             color: var(--dark);
         }
         header {
@@ -24,7 +25,7 @@
             position: sticky;
             top: 0;
             z-index: 999;
-            padding: 15px 20px;
+            padding: 15px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -34,57 +35,120 @@
             margin: 0;
             font-size: 24px;
             font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .user-status {
             font-weight: 600;
             color: var(--dark);
             font-size: 14px;
+            background: var(--light);
+            padding: 8px 16px;
+            border-radius: 20px;
         }
         .container {
             max-width: 800px;
             margin: 20px auto;
-            padding: 10px;
+            padding: 0 20px 100px 20px;
         }
-        h2 {
-            font-size: 20px;
+        .restaurant-info {
+            border-bottom: 1px dashed #edebef;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        .restaurant-info h2 {
+            font-size: 24px;
+            margin: 0 0 8px 0;
             font-weight: 700;
-            margin-bottom: 20px;
+        }
+        .meta-info {
+            font-size: 14px;
+            color: var(--gray);
+            display: flex;
+            gap: 15px;
+            font-weight: 600;
+        }
+        .rating {
+            color: #db7c38;
+            background: #fff3e6;
+            padding: 2px 6px;
+            border-radius: 4px;
         }
         .menu-item {
             background: white;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 16px;
+            padding: 24px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
-            border: 1px solid #e9e9eb;
+            border-bottom: 1px solid #edebef;
+        }
+        .item-details {
+            max-width: 70%;
+        }
+        .veg-icon {
+            width: 14px;
+            height: 14px;
+            border: 1px solid var(--green);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .veg-circle {
+            width: 7px;
+            height: 7px;
+            background: var(--green);
+            border-radius: 50%;
         }
         .item-details h3 {
             margin: 0 0 4px 0;
             font-size: 18px;
+            color: #3e4152;
         }
         .item-details p {
             margin: 0 0 12px 0;
-            font-size: 13px;
-            color: var(--gray);
+            font-size: 14px;
+            color: rgba(40,44,63,.45);
+            line-height: 1.3;
         }
         .price {
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
+            color: #3e4152;
+        }
+        .item-image-container {
+            position: relative;
+            width: 118px;
+            height: 96px;
+        }
+        .item-img {
+            width: 118px;
+            height: 96px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
         }
         .add-btn {
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
             background: white;
             border: 1px solid #e9e9eb;
-            color: #60b246;
+            color: var(--green);
             font-weight: 700;
-            padding: 10px 32px;
-            border-radius: 8px;
+            padding: 8px 25px;
+            border-radius: 6px;
             cursor: pointer;
-            box-shadow: 0 3px 8px -3px #cbdbc6;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            font-size: 12px;
+            letter-spacing: 0.5px;
         }
-        /* Swiggy Style Login Overlay */
+        .add-btn:hover {
+            background-color: #f9f9f9;
+        }
+        /* Login Overlay Slide-in Panel */
         .login-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -108,18 +172,19 @@
             color: var(--dark);
             font-size: 30px;
             margin-bottom: 5px;
+            font-weight: 700;
         }
         .login-container p {
             color: var(--primary);
             font-weight: 600;
             margin-top: 0;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
         .login-container input, .login-container textarea {
             padding: 16px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border: 1px solid #d4d5d9;
-            font-size: 16px;
+            font-size: 15px;
             border-radius: 4px;
             outline: none;
         }
@@ -131,35 +196,40 @@
             color: white;
             border: none;
             padding: 16px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            text-transform: uppercase;
-            margin-top: 10px;
+            letter-spacing: 0.5px;
         }
         .cart-bar {
             position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: #60b246;
+            bottom: 20px; left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 760px;
+            background: var(--green);
             color: white;
-            padding: 16px 24px;
+            padding: 14px 20px;
+            border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
             display: none;
-            box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(96, 178, 70, 0.4);
             z-index: 999;
+            box-sizing: border-box;
         }
         .checkout-btn {
-            background: white;
-            color: #60b246;
+            background: transparent;
+            color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
             cursor: pointer;
             font-weight: 700;
-            text-transform: uppercase;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
     </style>
 </head>
@@ -171,7 +241,7 @@
         <p>Enter details to start ordering</p>
         <input type="text" id="custName" placeholder="Your Name" required>
         <input type="tel" id="custPhone" placeholder="Phone Number" required>
-        <textarea id="custAddress" placeholder="Delivery Address (Flat No, Area, City)" rows="3" required></textarea>
+        <textarea id="custAddress" placeholder="Full Delivery Address (Flat No, Area, City)" rows="3" required></textarea>
         <button class="login-btn" onclick="handleLogin()">Login & Continue</button>
     </div>
 </div>
@@ -184,39 +254,62 @@
 </header>
 
 <div class="container">
-    <h2>Our Special Menu</h2>
+    <div class="restaurant-info">
+        <h2>Vaghar Box Store</h2>
+        <div class="meta-info">
+            <span class="rating">⭐ 4.6</span>
+            <span>•</span>
+            <span>20-30 mins</span>
+            <span>•</span>
+            <span>Premium Spices & Blends</span>
+        </div>
+    </div>
+    
+    <h2>Recommended Items</h2>
     
     <div class="menu-item">
         <div class="item-details">
+            <div class="veg-icon"><div class="veg-circle"></div></div>
             <h3>Special Garam Masala</h3>
-            <p>Premium authentic blend (250g)</p>
-            <div class="price">$150</div>
+            <p>Premium authentic Indian aromatic blend. Handcrafted with traditional stone-ground spices to retain natural oils and absolute freshness.</p>
+            <div class="price">₹150</div>
         </div>
-        <button class="add-btn" onclick="addToCart('Special Garam Masala', 150)">ADD</button>
+        <div class="item-image-container">
+            <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=200&auto=format&fit=crop&q=80" alt="Garam Masala" class="item-img">
+            <button class="add-btn" onclick="addToCart('Special Garam Masala', 150)">ADD</button>
+        </div>
     </div>
 
     <div class="menu-item">
         <div class="item-details">
+            <div class="veg-icon"><div class="veg-circle"></div></div>
             <h3>Kathiyawadi Garlic Chutney</h3>
-            <p>Traditional spicy recipe (200g)</p>
-            <div class="price">$100</div>
+            <p>Traditional spicy and tangy recipe made with fresh red chillies and rich local garlic. Best companion for bhakri, rotla, or snacks.</p>
+            <div class="price">₹100</div>
         </div>
-        <button class="add-btn" onclick="addToCart('Kathiyawadi Garlic Chutney', 100)">ADD</button>
+        <div class="item-image-container">
+            <img src="https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=200&auto=format&fit=crop&q=80" alt="Garlic Chutney" class="item-img">
+            <button class="add-btn" onclick="addToCart('Kathiyawadi Garlic Chutney', 100)">ADD</button>
+        </div>
     </div>
 
     <div class="menu-item">
         <div class="item-details">
+            <div class="veg-icon"><div class="veg-circle"></div></div>
             <h3>Gujarati Dal Masala</h3>
-            <p>Perfect sweet & sour blend (250g)</p>
-            <div class="price">$120</div>
+            <p>Perfect sweet, sour, and spicy traditional blend. Created specially to get that authentic wedding-style Gujarati Dal flavor at home.</p>
+            <div class="price">₹120</div>
         </div>
-        <button class="add-btn" onclick="addToCart('Gujarati Dal Masala', 120)">ADD</button>
+        <div class="item-image-container">
+            <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&auto=format&fit=crop&q=80" alt="Dal Masala" class="item-img">
+            <button class="add-btn" onclick="addToCart('Gujarati Dal Masala', 120)">ADD</button>
+        </div>
     </div>
 </div>
 
 <div class="cart-bar" id="cartBar">
-    <span id="cartTotal">0 Items | Total: $0</span>
-    <button class="checkout-btn" onclick="sendOrder()">Confirm Order ➔</button>
+    <span id="cartTotal">0 Items | Total: ₹0</span>
+    <button class="checkout-btn" onclick="sendOrder()">View Cart ➔</button>
 </div>
 
 <script>
@@ -224,7 +317,6 @@
     let total = 0;
     let customer = { name: "", phone: "", address: "" };
 
-    // ચેક કરો કે કસ્ટમર પહેલાથી લોગીન છે કે નહિ
     window.onload = function() {
         let savedName = localStorage.getItem("cust_name");
         if(savedName) {
@@ -232,7 +324,7 @@
             customer.phone = localStorage.getItem("cust_phone");
             customer.address = localStorage.getItem("cust_address");
             document.getElementById('loginOverlay').style.display = 'none';
-            document.getElementById('userDisplay').innerText = "👤 Hi, " + customer.name;
+            document.getElementById('userDisplay').innerText = "👤 " + customer.name;
         }
     }
 
@@ -247,14 +339,12 @@
         }
 
         customer = { name, phone, address };
-        
-        // બ્રાઉઝરમાં ડેટા સેવ કરવા માટે
         localStorage.setItem("cust_name", name);
         localStorage.setItem("cust_phone", phone);
         localStorage.setItem("cust_address", address);
 
         document.getElementById('loginOverlay').style.display = 'none';
-        document.getElementById('userDisplay').innerText = "👤 Hi, " + name;
+        document.getElementById('userDisplay').innerText = "👤 " + name;
     }
 
     function addToCart(name, price) {
@@ -262,24 +352,24 @@
         total += price;
         
         document.getElementById('cartBar').style.display = 'flex';
-        document.getElementById('cartTotal').innerText = cart.length + " Items Added | Total: $" + total;
+        document.getElementById('cartTotal').innerText = cart.length + " Item" + (cart.length > 1 ? "s" : "") + " | ₹" + total;
     }
 
     function sendOrder() {
-        // તમારો સાચો WhatsApp નંબર અહીં દેશના કોડ (91) સાથે લખો
+        // અહીં તમારો સાચો વૉટ્સએપ નંબર બદલી નાખજો
         let phoneNumber = "919999999999"; 
         
-        let message = `*NEW ORDER - VAGHAR BOX*%0A`;
-        message += `-------------------------%0A`;
+        let message = `*VAGHAR BOX - NEW ORDER*%0A`;
+        message += `=========================%0A`;
         message += `*Customer Details:*%0A`;
         message += `Name: ${customer.name}%0A`;
         message += `Phone: ${customer.phone}%0A`;
         message += `Address: ${customer.address}%0A`;
-        message += `-------------------------%0A`;
+        message += `=========================%0A`;
         message += `*Items Ordered:*%0A- ${cart.join('%0A- ')}%0A`;
-        message += `-------------------------%0A`;
-        message += `*Total Amount: $${total}*%0A%0A`;
-        message += `Please confirm the order and share payment QR.`;
+        message += `=========================%0A`;
+        message += `*Total Amount: ₹${total}*%0A%0A`;
+        message += `Please send the payment link/QR code to confirm.`;
         
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     }
