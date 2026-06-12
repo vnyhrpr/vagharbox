@@ -23,7 +23,7 @@
             box-shadow: 0 15px 40px -20px rgba(40,44,63,.15);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 999;
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
@@ -34,7 +34,11 @@
             margin: 0;
             font-size: 24px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+        }
+        .user-status {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
         }
         .container {
             max-width: 800px;
@@ -45,7 +49,6 @@
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 20px;
-            color: var(--dark);
         }
         .menu-item {
             background: white;
@@ -61,7 +64,6 @@
         .item-details h3 {
             margin: 0 0 4px 0;
             font-size: 18px;
-            font-weight: 600;
         }
         .item-details p {
             margin: 0 0 12px 0;
@@ -69,7 +71,6 @@
             color: var(--gray);
         }
         .price {
-            color: var(--dark);
             font-weight: 600;
             font-size: 16px;
         }
@@ -82,17 +83,63 @@
             border-radius: 8px;
             cursor: pointer;
             box-shadow: 0 3px 8px -3px #cbdbc6;
-            transition: all 0.2s ease;
         }
-        .add-btn:hover {
-            box-shadow: 0 4px 12px -3px #a3cc96;
-            background-color: #f9f9f9;
+        /* Swiggy Style Login Overlay */
+        .login-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(40, 44, 63, 0.7);
+            z-index: 10000;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .login-container {
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            height: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+        }
+        .login-container h2 {
+            color: var(--dark);
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+        .login-container p {
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+        .login-container input, .login-container textarea {
+            padding: 16px;
+            margin-bottom: 15px;
+            border: 1px solid #d4d5d9;
+            font-size: 16px;
+            border-radius: 4px;
+            outline: none;
+        }
+        .login-container input:focus, .login-container textarea:focus {
+            border-color: var(--primary);
+        }
+        .login-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 10px;
         }
         .cart-bar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             background: #60b246;
             color: white;
             padding: 16px 24px;
@@ -100,9 +147,9 @@
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
-            font-size: 16px;
             display: none;
             box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+            z-index: 999;
         }
         .checkout-btn {
             background: white;
@@ -112,17 +159,28 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: 700;
-            font-size: 14px;
             text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
+<div class="login-overlay" id="loginOverlay">
+    <div class="login-container">
+        <h2>Login</h2>
+        <p>Enter details to start ordering</p>
+        <input type="text" id="custName" placeholder="Your Name" required>
+        <input type="tel" id="custPhone" placeholder="Phone Number" required>
+        <textarea id="custAddress" placeholder="Delivery Address (Flat No, Area, City)" rows="3" required></textarea>
+        <button class="login-btn" onclick="handleLogin()">Login & Continue</button>
+    </div>
+</div>
+
 <header>
     <div class="logo">
         <h1>Vaghar Box 📦</h1>
     </div>
+    <div class="user-status" id="userDisplay">Not Logged In</div>
 </header>
 
 <div class="container">
@@ -164,6 +222,40 @@
 <script>
     let cart = [];
     let total = 0;
+    let customer = { name: "", phone: "", address: "" };
+
+    // ચેક કરો કે કસ્ટમર પહેલાથી લોગીન છે કે નહિ
+    window.onload = function() {
+        let savedName = localStorage.getItem("cust_name");
+        if(savedName) {
+            customer.name = savedName;
+            customer.phone = localStorage.getItem("cust_phone");
+            customer.address = localStorage.getItem("cust_address");
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.getElementById('userDisplay').innerText = "👤 Hi, " + customer.name;
+        }
+    }
+
+    function handleLogin() {
+        let name = document.getElementById('custName').value.trim();
+        let phone = document.getElementById('custPhone').value.trim();
+        let address = document.getElementById('custAddress').value.trim();
+
+        if(name == "" || phone == "" || address == "") {
+            alert("Please fill all details to login.");
+            return;
+        }
+
+        customer = { name, phone, address };
+        
+        // બ્રાઉઝરમાં ડેટા સેવ કરવા માટે
+        localStorage.setItem("cust_name", name);
+        localStorage.setItem("cust_phone", phone);
+        localStorage.setItem("cust_address", address);
+
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('userDisplay').innerText = "👤 Hi, " + name;
+    }
 
     function addToCart(name, price) {
         cart.push(name);
@@ -174,9 +266,20 @@
     }
 
     function sendOrder() {
-        // તમારો સાચો WhatsApp નંબર અહીં લખો (with country code 91)
+        // તમારો સાચો WhatsApp નંબર અહીં દેશના કોડ (91) સાથે લખો
         let phoneNumber = "919999999999"; 
-        let message = `New Order From Vaghar Box:%0A%0AItems:%0A- ${cart.join('%0A- ')}%0A%0A*Total Bill: $${total}*%0A%0APlease share UPI details or QR code for payment.`;
+        
+        let message = `*NEW ORDER - VAGHAR BOX*%0A`;
+        message += `-------------------------%0A`;
+        message += `*Customer Details:*%0A`;
+        message += `Name: ${customer.name}%0A`;
+        message += `Phone: ${customer.phone}%0A`;
+        message += `Address: ${customer.address}%0A`;
+        message += `-------------------------%0A`;
+        message += `*Items Ordered:*%0A- ${cart.join('%0A- ')}%0A`;
+        message += `-------------------------%0A`;
+        message += `*Total Amount: $${total}*%0A%0A`;
+        message += `Please confirm the order and share payment QR.`;
         
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     }
