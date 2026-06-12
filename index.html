@@ -4,92 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vaghar Box - Premium Spices</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background: #f4f6f8; margin: 0; padding-bottom: 80px; }
-        
-        /* Premium Header */
-        header { background: white; padding: 15px 20px; display: flex; align-items: center; justify-content: center; gap: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        
-        /* Category Filters */
-        .filters { text-align: center; margin: 20px 0; }
-        .filter-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid #fc8019; background: white; color: #fc8019; font-weight: 600; cursor: pointer; transition: 0.3s; margin: 0 5px; }
-        .filter-btn:hover { background: #fc8019; color: white; }
-
-        /* Menu Card Styles */
-        .menu-container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
-        .card { background: white; border-radius: 16px; padding: 15px; margin-bottom: 15px; display: flex; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .card img { width: 100px; height: 100px; border-radius: 12px; object-fit: cover; }
-        .info { margin-left: 15px; flex-grow: 1; }
-        .info h3 { margin: 0; font-size: 16px; color: #282c3f; }
-        .info p { color: #535665; font-size: 14px; margin: 5px 0; }
-        .price { font-weight: 800; color: #000; }
-        .add-btn { background: #60b246; color: white; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; }
-        
-        /* Floating Cart */
-        .floating-cart { position: fixed; bottom: 20px; left: 15px; right: 15px; background: #60b246; color: white; padding: 15px 20px; border-radius: 10px; display: none; justify-content: space-between; align-items: center; font-weight: bold; max-width: 600px; margin: 0 auto; }
+        :root { --accent: #fc8019; --dark: #282c3f; --light: #f4f6f8; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fdfdfd; margin: 0; }
+        .hero { background: var(--dark); color: white; padding: 40px 20px; text-align: center; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 20px; max-width: 1000px; margin: auto; }
+        .food-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: 0.3s; }
+        .food-card:hover { transform: translateY(-10px); }
+        .food-card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-content { padding: 20px; }
+        .add-btn { background: var(--accent); color: white; border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
 <body>
-
-<header>
-    <img src="logo.png" alt="Vaghar Box Logo" style="height: 50px; border-radius: 8px;">
-    <h1 style="margin: 0; font-size: 20px;">Vaghar Box</h1>
-</header>
-
-<div class="filters">
-    <button class="filter-btn" onclick="filterMenu('all')">All</button>
-    <button class="filter-btn" onclick="filterMenu('kathiyawadi')">Kathiyawadi</button>
-    <button class="filter-btn" onclick="filterMenu('punjabi')">Punjabi</button>
-</div>
-
-<div class="menu-container" id="menu">
-    <div class="card" data-category="kathiyawadi">
-        <img src="https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=200" alt="Chutney">
-        <div class="info">
-            <h3>Garlic Chutney</h3>
-            <p>Kathiyawadi Special</p>
-            <p class="price">₹100</p>
-            <button class="add-btn" onclick="add('Garlic Chutney', 100)">ADD</button>
+    <div class="hero">
+        <h1>Vaghar Box 📦</h1>
+        <p>Authentic Flavors, Delivered to your Doorstep.</p>
+    </div>
+    <div class="menu-grid">
+        <div class="food-card">
+            <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=500" alt="Masala">
+            <div class="card-content">
+                <h3>Special Garam Masala</h3>
+                <p>₹150 | Kathiyawadi Special</p>
+                <button class="add-btn" onclick="alert('Added!')">Add to Cart</button>
+            </div>
         </div>
     </div>
-    <div class="card" data-category="punjabi">
-        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200" alt="Paneer">
-        <div class="info">
-            <h3>Paneer Butter Masala</h3>
-            <p>Punjabi Special</p>
-            <p class="price">₹250</p>
-            <button class="add-btn" onclick="add('Paneer Butter Masala', 250)">ADD</button>
-        </div>
-    </div>
-</div>
-
-<div id="cart" class="floating-cart">
-    <span id="cart-text">0 items</span>
-    <button style="background:white; color:#60b246; border:none; padding:8px 15px; border-radius:5px; font-weight:bold; cursor:pointer;" onclick="checkout()">Checkout</button>
-</div>
-
-<script>
-    function filterMenu(category) {
-        let cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            if (category === 'all' || card.getAttribute('data-category') === category) card.style.display = 'flex';
-            else card.style.display = 'none';
-        });
-    }
-
-    let cart = []; let total = 0;
-    function add(name, price) {
-        cart.push(name); total += price;
-        document.getElementById('cart').style.display = 'flex';
-        document.getElementById('cart-text').innerText = cart.length + " Items | ₹" + total;
-    }
-
-    function checkout() {
-        let msg = "Order details: " + cart.join(", ") + ". Total: ₹" + total;
-        window.open("https://wa.me/919999999999?text=" + encodeURIComponent(msg));
-    }
-</script>
 </body>
 </html>
