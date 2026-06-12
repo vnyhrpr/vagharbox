@@ -1,120 +1,50 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>વઘાર બોક્સ - Vaghar Box</title>
+    <title>Vaghar Box - Premium Spices</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fcf8f2;
-            color: #333;
-        }
-        header {
-            background-color: #8B4513;
-            color: white;
-            text-align: center;
-            padding: 30px 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            color: #f4a261;
-        }
-        header p {
-            margin: 5px 0 0 0;
-            font-style: italic;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 15px;
-        }
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            margin-bottom: 15px;
-            border: 1px solid #eaddca;
-        }
-        .product-info h3 {
-            margin: 0 0 5px 0;
-            font-size: 1.3rem;
-            color: #8B4513;
-        }
-        .product-info p {
-            margin: 0;
-            color: #666;
-            font-weight: bold;
-        }
-        .order-btn {
-            background-color: #e76f51;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-        .order-btn:hover {
-            background-color: #2a9d8f;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #777;
-        }
+        body { font-family: 'Poppins', sans-serif; background: #fdfdfd; margin: 0; padding: 0; }
+        header { background: white; padding: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .hero { background: linear-gradient(135deg, #fc8019, #e67e22); color: white; padding: 50px 20px; text-align: center; border-radius: 0 0 50px 50px; }
+        .container { max-width: 600px; margin: -30px auto 20px; padding: 20px; }
+        .card { background: white; border-radius: 20px; padding: 20px; margin-bottom: 20px; display: flex; align-items: center; box-shadow: 0 10px 20px rgba(0,0,0,0.08); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 80px; height: 80px; border-radius: 15px; object-fit: cover; }
+        .details { margin-left: 20px; flex-grow: 1; }
+        .details h3 { margin: 0; color: #333; }
+        .details p { margin: 5px 0; color: #777; font-size: 0.9em; }
+        .price { font-weight: bold; color: #fc8019; }
+        .add-btn { background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>વઘાર બોક્સ (Vaghar Box)</h1>
-        <p>The Taste of Tradition</p>
-    </header>
+<header>
+    <img src="logo.png" alt="Logo" style="height: 50px;">
+</header>
 
-    <div class="container">
-        <div class="product-card">
-            <div class="product-info">
-                <h3>સ્પેશિયલ ગરમ મસાલો (Premium Garam Masala)</h3>
-                <p>ભાવ: ₹૧૫૦ (૨૫૦ ગ્રામ)</p>
-            </div>
-            <a href="https://wa.me/91YOURNUMBER?text=મને%20સ્પેશિયલ%20ગરમ%20મસાલો%20ઓર્ડર%20કરવો%20છે" target="_blank" class="order-btn">ઓર્ડર કરો</a>
-        </div>
+<div class="hero">
+    <h1>Vaghar Box</h1>
+    <p>Authentic Kathiyawadi Flavors Delivered</p>
+</div>
 
-        <div class="product-card">
-            <div class="product-info">
-                <h3>દેશી કાઠિયાવાડી લસણ ચટણી (Garlic Chutney)</h3>
-                <p>ભાવ: ₹૧૦步 (૨૦૦ ગ્રામ)</p>
-            </div>
-            <a href="https://wa.me/91YOURNUMBER?text=મને%20દેશી%20કાઠિયાવાડી%20લસણ%20ચટણી%20ઓર્ડર%20કરવો%20છે" target="_blank" class="order-btn">ઓર્ડર કરો</a>
-        </div>
-
-        <div class="product-card">
-            <div class="product-info">
-                <h3>ગુજરાતી ખાટી-મીઠી દાળ મસાલો</h3>
-                <p>ભાવ: ₹૧૨૦ (૨૫૦ ગ્રામ)</p>
-            </div>
-            <a href="https://wa.me/91YOURNUMBER?text=મને%20ગુજરાતી%20દાળ%20મસાલો%20ઓર્ડર%20કરવો%20છે" target="_blank" class="order-btn">ઓર્ડર કરો</a>
+<div class="container">
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=200" alt="Masala">
+        <div class="details">
+            <h3>Garam Masala</h3>
+            <p class="price">₹150</p>
+            <button class="add-btn" onclick="addToCart('Garam Masala', 150)">+ Add</button>
         </div>
     </div>
+    </div>
 
-    <footer>
-        <p>© 2026 વઘાર બોક્સ. All Rights Reserved.</p>
-    </footer>
-
+<script>
+    function addToCart(name, price) {
+        alert(name + " added to order!");
+    }
+</script>
 </body>
 </html>
